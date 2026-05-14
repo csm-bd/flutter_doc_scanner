@@ -40,6 +40,7 @@ class FlutterDocScanner {
     ImageFormat imageFormat = ImageFormat.jpeg,
     double quality = 0.9,
     bool useAutomaticSinglePictureProcessing = false,
+    int limit = 1,
   }) async {
     _validatePage(page);
     if (quality < 0.0 || quality > 1.0) {
@@ -52,6 +53,7 @@ class FlutterDocScanner {
     final data = await FlutterDocScannerPlatform.instance
         .getScannedDocumentAsImages(
           page: page,
+          limit: limit,
           imageFormat: imageFormat.name,
           quality: quality,
           useAutomaticSinglePictureProcessing:

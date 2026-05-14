@@ -1,12 +1,10 @@
-import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_doc_scanner/flutter_doc_scanner.dart';
-import 'package:flutter_doc_scanner/flutter_doc_scanner_platform_interface.dart';
 import 'package:flutter_doc_scanner/flutter_doc_scanner_method_channel.dart';
+import 'package:flutter_doc_scanner/flutter_doc_scanner_platform_interface.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-class MockFlutterDocScannerPlatform
-    with MockPlatformInterfaceMixin
-    implements FlutterDocScannerPlatform {
+class MockFlutterDocScannerPlatform with MockPlatformInterfaceMixin implements FlutterDocScannerPlatform {
   @override
   Future<String?> getPlatformVersion() => Future.value('42');
 
@@ -19,7 +17,9 @@ class MockFlutterDocScannerPlatform
     required String imageFormat,
     required double quality,
     bool useAutomaticSinglePictureProcessing = false,
-  }) => Future.value();
+    int limit = 1,
+  }) =>
+      Future.value();
 
   @override
   Future<dynamic> getScannedDocumentAsPdf(int page) => Future.value();
@@ -29,8 +29,7 @@ class MockFlutterDocScannerPlatform
 }
 
 void main() {
-  final FlutterDocScannerPlatform initialPlatform =
-      FlutterDocScannerPlatform.instance;
+  final FlutterDocScannerPlatform initialPlatform = FlutterDocScannerPlatform.instance;
 
   test('$MethodChannelFlutterDocScanner is the default instance', () {
     expect(initialPlatform, isInstanceOf<MethodChannelFlutterDocScanner>());
@@ -38,8 +37,7 @@ void main() {
 
   test('getPlatformVersion', () async {
     FlutterDocScanner flutterDocScannerPlugin = FlutterDocScanner();
-    MockFlutterDocScannerPlatform fakePlatform =
-        MockFlutterDocScannerPlatform();
+    MockFlutterDocScannerPlatform fakePlatform = MockFlutterDocScannerPlatform();
     FlutterDocScannerPlatform.instance = fakePlatform;
 
     expect(await flutterDocScannerPlugin.getPlatformVersion(), '42');

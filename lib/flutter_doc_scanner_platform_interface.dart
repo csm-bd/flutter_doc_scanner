@@ -45,6 +45,7 @@ abstract class FlutterDocScannerPlatform extends PlatformInterface {
     required int page,
     required String imageFormat,
     required double quality,
+    int limit = 1,
     bool useAutomaticSinglePictureProcessing = false,
   }) {
     throw UnimplementedError(
